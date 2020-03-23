@@ -1,0 +1,30 @@
+Make links to Hatena blog posts in serial numbers.	${VERSION}
+USAGE:
+  ${THIS} -d DOMAIN -i ID -t TIME -s START -e END -u URL_FORMAT -o OUT_FORMAT
+SUB COMMAND:
+  h help    : Show help
+  v version : Show version
+PARAMETERS:
+  -d DOMAIN: Hatena Domain           : '${DOMAIN}'
+  -i ID    : Hatena ID               : '${ID}'
+  -t TIME  : hours, minutes, secondes: '${TIME}'
+  -e END   : end date                : runtime date '${END}'
+  -s START : start date              : runtime - ${DAYS}days ago '${START}'
+  -u URL_FORMAT: ${URL_FORMAT}
+  -o OUT_FORMAT: ${OUT_FORMAT}
+HIDDEN PARAMETERS:
+  -D DEBUG : Display debug information
+  -h -?    : Display help
+  -v       : Display version
+SETTING FILES:
+  defaults: $HERE/cli/defaults.sh
+  domains : $HERE/hatena/domains.txt
+FILE DISCRIPTER:
+  1 stdout: Hatena article link
+  2 stderr: error, warn, debug
+COMMAND EXAMPLES:
+  ${APP} -s 2000/01/01 -e 2000/12/31
+  ${APP} 2>/dev/null
+  ${APP} -i yamada -t 123456 -s 1999/12/31 -e 2000/01/01
+  ${APP} -i yamada -t 123456 -s 1999/12/31 -e 2000/01/01 -u '\${SCHEME}://\${ID}.\${DOMAIN}/entry/\${DATE}/\${TIME}:title:bookmark' -o '* [\$URL]'
+  ID=yamada TIME=123456 START=1999/12/31 END=2000/01/01 DOMAIN=hateblo.jp URL_FORMAT='\${SCHEME}://\${ID}.\${DOMAIN}/entry/\${DATE}/\${TIME}:title:bookmark' OUT_FORMAT='* [\$URL]' ${APP}

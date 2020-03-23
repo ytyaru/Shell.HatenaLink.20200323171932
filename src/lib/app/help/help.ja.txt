@@ -1,0 +1,30 @@
+はてなブログ記事のリンクを日付連番に作る。	${VERSION}
+使い方:
+  ${APP} -d DOMAIN -i ID -t TIME -s START -e END -u URL_FORMAT -o OUT_FORMAT
+サブコマンド:
+  h help    : ヘルプを表示する
+  v version : バージョンを表示する
+引数:
+  -d DOMAIN: はてなブログのドメイン: '${DOMAIN}'
+  -i ID    : はてなID              : '${ID}'
+  -t TIME  : 時分秒                : '${TIME}'
+  -e END   : 終了日                : 実行日 '${END}'
+  -s START : 開始日                : 実行日から${DAYS}日前 '${START}'
+  -u URL_FORMAT: ${URL_FORMAT}
+  -o OUT_FORMAT: ${OUT_FORMAT}
+隠し引数
+  -D DEBUG : デバッグ情報を出力する
+  -h -?    : ヘルプを表示する
+  -v       : バージョンを表示する
+設定ファイル:
+  defaults: $APP_ROOT/app/defaults.sh
+  domains : $APP_ROOT/hatena/domains.txt
+ファイルディスクリプタ
+    1 stdout: はてな記事リンク
+    2 stderr: エラー、警告、デバッグ
+コマンド例:
+  ${APP} -s 2000/01/01 -e 2000/12/31
+  ${APP} 2>/dev/null
+  ${APP} -i yamada -t 123456 -s 1999/12/31 -e 2000/01/01
+  ${APP} -i yamada -t 123456 -s 1999/12/31 -e 2000/01/01 -u '\${SCHEME}://\${ID}.\${DOMAIN}/entry/\${DATE}/\${TIME}:title:bookmark' -o '* [\$URL]'
+  ID=yamada TIME=123456 START=1999/12/31 END=2000/01/01 DOMAIN=hateblo.jp URL_FORMAT='\${SCHEME}://\${ID}.\${DOMAIN}/entry/\${DATE}/\${TIME}:title:bookmark' OUT_FORMAT='* [\$URL]' ${APP}
