@@ -1,4 +1,4 @@
-SCHEME=http
+SCHEME=https
 # hatenablog.com, hatenablog.jp, hateblo.jp, hatenadiary.com, hatenadiary.jp
 DOMAIN=hatenablog.com
     ID=ytyaru
